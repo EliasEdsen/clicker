@@ -1,0 +1,8 @@
+{
+  "image": [
+    {"id": "sprite.png"    , "src": "./sprites/sprite.png"   },
+
+    {"id": "background.png", "src": "./images/background.png"},
+    {"id": "faq.png"       , "src": "./images/faq.png"       },
+  ]
+}

@@ -1,0 +1,302 @@
+.width ( @width ) {
+	//
+}
+.width ( @width ) when (isnumber(@width)), (@width=auto) { width: @width; }
+.height ( @height ) {
+	//
+}
+.height ( @height ) when (isnumber(@height)), (@height=auto) { height: @height; }
+.left ( @left ) {
+	//
+}
+.left ( @left ) when (isnumber(@left)), (@left=auto) { left: @left; }
+.top ( @top ) {
+	//
+}
+.top ( @top ) when (isnumber(@top)), (@top=auto) { top: @top; }
+.imgUrl ( @imgUrl, @imgPos ) {}
+.imgUrl ( @imgUrl, @imgPos ) when (isstring(@imgUrl)) { background: url("../img/@{imgUrl}") no-repeat @imgPos transparent; }
+.line-height ( @line-height ) {
+	//
+}
+.line-height ( @line-height ) when (isnumber(@line-height)), (@line-height = auto) { line-height: @line-height; }
+.text-align ( @text-align ) {
+	//
+}
+.text-align ( @text-align ) when (@text-align = left), (@text-align = right), (@text-align = center)  { text-align: @text-align; }
+.font-size ( @font-size ) {
+	//
+}
+.font-size ( @font-size ) when (isnumber(@font-size)) { font-size: @font-size; }
+.font-weight ( @font-size ) {
+	//
+}
+.font-weight ( @font-weight ) when (@font-weight = normal), (@font-weight = bold) { font-weight: @font-weight; }
+.color ( @color ) {
+	//
+}
+.color ( @color ) when (iscolor(@color)) { color: @color; }
+
+.minSizes(@width, @height) {
+	min-width: @width;
+	min-height: @height;
+}
+.maxSizes(@width, @height) {
+	max-width: @width;
+	max-height: @height;
+}
+
+.absolute ( @width, @height, @left, @top ) {
+	.width ( @width );
+	.height ( @height );
+	position: absolute;
+	.left ( @left );
+	.top ( @top );
+}
+.sprite ( @width, @height, @left, @top, @imgUrl, @imgPos ) {
+	.width ( @width );
+	.height ( @height );
+	position: absolute;
+	.left ( @left );
+	.top ( @top );
+	.imgUrl( @imgUrl, @imgPos );
+}
+.inlineBlock ( @width, @height ) {
+	.width ( @width );
+	.height ( @height );
+	display: inline-block;
+	vertical-align: middle; 
+}
+.inlineIco ( @width, @height, @imgUrl, @imgPos ) {
+	.width ( @width );
+	.height ( @height );
+	display: inline-block;
+	vertical-align: middle;
+	.imgUrl( @imgUrl, @imgPos );    
+}
+.text ( @line-height, @text-align, @font-size, @font-weight, @color ) {
+	.line-height ( @line-height );
+	.text-align ( @text-align );
+	.font-size ( @font-size );
+	.font-weight ( @font-weight );
+	.color ( @color );  
+}
+.overtext ( @line-height, @text-align, @font-size, @font-weight, @color ) {
+	overflow: hidden;
+	white-space: nowrap;
+	.line-height ( @line-height );
+	.text-align ( @text-align );
+	text-overflow: ellipsis;
+	.font-size ( @font-size );
+	.font-weight ( @font-weight );
+	.color ( @color );  
+}
+.stroke ( @border: 1px, @gauss: 1px, @color: #FFFFFF) {
+	text-shadow: 0 @border @gauss @color,
+		0 -@border @gauss @color,
+		-@border 0 @gauss @color,
+		@border 0 @gauss @color,
+		@border @border @gauss @color,
+		@border -@border @gauss @color,
+		-@border @border @gauss @color,
+		-@border -@border @gauss @color;
+}
+.borderRadius(@border-radius) {
+	border-radius: @border-radius;
+	-moz-border-radius: @border-radius;
+}
+.textShadow () {
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.9);
+}
+.transform(@transform) {
+	-webkit-transform: @transform;
+	-o-transform: @transform;
+	-ms-transform: @transform;
+	-moz-transform: @transform;
+	transform: @transform;
+}
+.translate3D(@translate) {
+	.transform ( translate3d(@translate));
+}
+.rotate(@angle) { 
+	.transform(rotate(@angle));
+}
+.filter(@filter) {
+	-webkit-filter: @filter;
+	filter: @filter;
+}
+.animation( @animationSettings ) {
+	-webkit-animation: @animationSettings;
+	-moz-animation: @animationSettings;
+	-o-animation: @animationSettings;
+	animation: @animationSettings;  
+}
+.delay( @animationdelaySettings ) {
+	-webkit-animation-delay: @animationdelaySettings;
+	-moz-animation-delay: @animationdelaySettings;
+	-o-animation-delay: @animationdelaySettings;
+	animation-delay: @animationdelaySettings;   
+}
+
+@newline: `"\n"`;
+.animBgFromTo (@name, @pxFrom, @pxTo) {
+	.Keyframe(@pre, @vendor) {
+		@keyframe: ~"@{pre}@@{vendor}keyframes @{name} {@{newline}from";
+		@{keyframe} {
+			background-position:  @pxFrom;
+		}    
+		to  {
+			background-position: @pxTo;
+		}
+		@endframe: ~"}@{newline}.less_fix";
+		@{endframe} {
+			opacity: inherit;
+		}
+	} 
+	.Keyframe(~"@{newline}", "-o-");
+	.Keyframe(~"@{newline}", "-moz-");
+	.Keyframe(~"@{newline}", "-webkit-");
+	.Keyframe(~"@{newline}", "");
+}
+
+.animBgFromTo2 (@name, @pxFrom, @pxTo) {
+	.Keyframe(@pre, @vendor, @transform) {
+		@keyframe: ~"@{pre}@@{vendor}keyframes @{name} {@{newline}from";
+		@{keyframe} {
+			@{transform}:  translate3d(@pxFrom, 0, 0);
+		}
+		to  {
+			@{transform}:  translate3d(@pxTo, 0, 0);
+		}
+		@endframe: ~"}@{newline}.less_fix";
+		@{endframe} {
+			opacity: inherit;
+		}
+	}
+	.Keyframe(~"@{newline}", "-webkit-", -webkit-transform);
+	.Keyframe(~"@{newline}", "", transform);
+}
+
+.animBgFromTo3D (@name, @pxFrom, @pxTo) {
+	.Keyframe(@pre, @vendor, @transform) {
+		@keyframe: ~"@{pre}@@{vendor}keyframes @{name} {@{newline}from";
+		@{keyframe} {
+			@{transform}:  translate3d(@pxFrom);
+		}
+		to  {
+			@{transform}:  translate3d(@pxTo);
+		}
+		@endframe: ~"}@{newline}.less_fix";
+		@{endframe} {
+			opacity: inherit;
+		}
+	}
+	.Keyframe(~"@{newline}", "-webkit-", -webkit-transform);
+	.Keyframe(~"@{newline}", "", transform);
+}
+
+.animFromToTransform (@name, @pxFrom, @pxTo) {
+	.Keyframe(@pre, @vendor, @transform) {
+		@keyframe: ~"@{pre}@@{vendor}keyframes @{name} {@{newline}from";
+		@{keyframe} {
+			@{transform}:  @pxFrom;
+		}
+		to  {
+			@{transform}:  @pxTo;
+		}
+		@endframe: ~"}@{newline}.less_fix";
+		@{endframe} {
+			opacity: inherit;
+		}
+	}
+	.Keyframe(~"@{newline}", "-webkit-", -webkit-transform);
+	.Keyframe(~"@{newline}", "", transform);
+}
+.animBgFromTo2Pause (@name, @pxFrom, @pxTo, @stop) {
+	.Keyframe(@pre, @vendor, @transform) {
+		@keyframe: ~"@{pre}@@{vendor}keyframes @{name} {@{newline}from";
+		@{keyframe} {
+			@{transform}:  translate3d(@pxFrom, 0, 0);
+		}
+		@{stop} {
+			@{transform}:  translate3d(@pxTo, 0, 0);
+		}
+		to  {
+			@{transform}:  translate3d(@pxTo, 0, 0);
+		}
+		@endframe: ~"}@{newline}.less_fix";
+		@{endframe} {
+		  opacity: inherit;
+		}
+	}
+	.Keyframe(~"@{newline}", "-o-", -o-transform);
+	.Keyframe(~"@{newline}", "-moz-", -moz-transform);
+	.Keyframe(~"@{newline}", "-webkit-", -webkit-transform);
+	.Keyframe(~"@{newline}", "", transform);
+}
+.animBgFromTo2PauseAlternate (@name, @pxFrom, @pxTo, @stop) {
+	.Keyframe(@pre, @vendor, @transform) {
+		@middle: floor(@stop / 2); 
+		@keyframe: ~"@{pre}@@{vendor}keyframes @{name} {@{newline}from";
+		@{keyframe} {
+			@{transform}:  translate3d(@pxFrom, 0, 0);
+		}
+		@{middle} {
+			@{transform}:  translate3d(@pxTo, 0, 0);
+		}
+		@{stop} {
+			@{transform}:  translate3d(@pxFrom, 0, 0);
+		}
+		to  {
+			@{transform}:  translate3d(@pxFrom, 0, 0);
+		}
+		@endframe: ~"}@{newline}.less_fix";
+		@{endframe} {
+		  opacity: inherit;
+		}
+	}
+	.Keyframe(~"@{newline}", "-o-", -o-transform);
+	.Keyframe(~"@{newline}", "-moz-", -moz-transform);
+	.Keyframe(~"@{newline}", "-webkit-", -webkit-transform);
+	.Keyframe(~"@{newline}", "", transform);
+}
+.transformMobile ( @transform ) {
+	-webkit-transform: @transform;
+	transform: @transform;
+}
+.transition ( @transition ) {
+	-webkit-transition: @transition;
+	-o-transition: @transition;
+	transition: @transition;
+}
+.background-size ( @background-size ) {
+	background-size: @background-size;
+	-moz-background-size: @background-size;
+}
+.box-shadow (@box-shadow) {
+	box-shadow: @box-shadow;
+	-moz-box-shadow: @box-shadow;
+	-webkit-box-shadow: @box-shadow;
+}
+
+.gradientBgTB(@gradient) {
+	.Gradient(@prefix, @direction) {
+		background: ~"@{prefix}linear-gradient(@{direction}, @{gradient})";
+	}
+	.Gradient("", "to bottom");
+	.Gradient("-moz-", "top");
+	.Gradient("-ms-", "top");
+	.Gradient("-o-", "top");
+	.Gradient("-webkit-", "top");
+}
+
+.gradientBgLR(@gradient) {
+	.Gradient(@prefix, @direction) {
+		background: ~"@{prefix}linear-gradient(@{direction}, @{gradient})";
+	}
+	.Gradient("", "to right");
+	.Gradient("-moz-", "left");
+	.Gradient("-ms-", "left");
+	.Gradient("-o-", "left");
+	.Gradient("-webkit-", "left");
+}

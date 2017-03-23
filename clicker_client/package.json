@@ -1,0 +1,48 @@
+{
+  "name": "clicker_client",
+  "version": "0.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "sudo gulp",
+    "gulp": "sudo gulp",
+    "dt": "sudo gulp dt",
+    "deploy:test": "sudo gulp deploy:test"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "",
+  "devDependencies": {
+    "coffeeify": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-browserify": "*",
+    "gulp-clean": "*",
+    "gulp-connect": "*",
+    "gulp-imagemin": "*",
+    "gulp-less": "*",
+    "gulp-livereload": "*",
+    "gulp-minify-css": "*",
+    "gulp-minify-html": "*",
+    "gulp-notify": "*",
+    "gulp-plumber": "*",
+    "gulp-rename": "*",
+    "gulp-rev": "*",
+    "gulp-rev-collector": "*",
+    "gulp-uglify": "*",
+    "gulp.spritesmith": "*",
+    "imagemin-pngquant": "*",
+    "merge-stream": "*",
+    "vinyl-buffer": "*"
+  },
+  "dependencies": {
+    "async": "*",
+    "backbone": "*",
+    "jquery": "*",
+    "underscore": "*"
+  }
+}

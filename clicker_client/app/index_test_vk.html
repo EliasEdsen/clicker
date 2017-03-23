@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html id="clicker" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clicker - Test - VK</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="wrapper">
+    <canvas id="canvas" width='760' height='600'></canvas>
+    <div class="loader">Загрузка...</div>
+    <div class="errorBlock">
+      <div class="title">Ошибка</div>
+      <div class="message"></div>
+    </div>
+  </div>
+  <script src="//vk.com/js/api/xd_connection.js?20"></script>
+  <script type="text/javascript">
+    VK.init(function() {
+      window.socialNetwork = "vk";
+      window.DEBUG_MODE = true;
+    }, function(res) {
+      console.error("res", res);
+    });
+  </script>
+  <!-- <script src="https://code.createjs.com/createjs-2015.05.21.min.js"></script> -->
+  <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
